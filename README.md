@@ -22,6 +22,8 @@ If you'd like to try directly from the Dockerfile you can build the image as:
 
 ```
 docker build  -t rtzan/docker-hadoop:2.7.1 .
+
+docker build  -t rtzan/docker-hadoop:2.7.1-7.5 .
 ```
 # Pull the image
 
@@ -39,6 +41,9 @@ In order to use the Docker image you have just built or pulled, use:
 
 ```
 docker run -it rtzan/docker-hadoop:2.7.1 /etc/bootstrap.sh -bash
+
+docker run -it rtzan/docker-hadoop:2.7.1-7.5 /etc/bootstrap.sh -bash
+
 ```
 
 ## Testing

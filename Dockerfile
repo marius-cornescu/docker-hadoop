@@ -2,7 +2,7 @@
 #
 # docker build -t rtzan/hadoop .
 
-FROM sequenceiq/pam:centos-6.5
+FROM rtzan/pam:centos-7.5
 MAINTAINER rtzan
 
 USER root
@@ -13,7 +13,7 @@ ENV https_proxy $http_proxy
 # install dev tools
 RUN yum clean all; \
     rpm --rebuilddb; \
-    yum install -y yum-plugin-ovl curl which tar sudo openssh-server openssh-clients rsync
+    yum install -y yum-plugin-ovl curl which tar sudo openssh-server openssh-clients rsync initscripts
 # update libselinux. see https://github.com/sequenceiq/hadoop-docker/issues/14
 RUN yum update -y libselinux && yum clean all
 
