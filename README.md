@@ -46,6 +46,24 @@ docker run -it rtzan/docker-hadoop:2.7.1-7.5 /etc/bootstrap.sh -bash
 
 ```
 
+
+```
+# get container ip:
+docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" <container name>
+
+
+# add a use testuser with password testuser
+useradd -p $(openssl passwd -1 testuser) testuser
+
+
+```
+
+
+
+
+
+
+
 ## Testing
 
 You can run one of the stock examples:

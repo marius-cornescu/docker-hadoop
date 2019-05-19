@@ -23,6 +23,8 @@ RUN ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key
 RUN ssh-keygen -q -N "" -t rsa -f /root/.ssh/id_rsa
 RUN cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
 
+# TO use ssh amd sftp with password
+# RUN yum reinstall cracklib-dicts
 
 # java
 RUN yum -y install java-1.8.0-openjdk-devel.x86_64 && yum clean all
@@ -109,5 +111,7 @@ EXPOSE 50010 50020 50070 50075 50090 8020 9000
 EXPOSE 10020 19888
 #Yarn ports
 EXPOSE 8030 8031 8032 8033 8040 8042 8088
+#SSHD port
+EXPOSE 2122
 #Other ports
-EXPOSE 49707 2122
+EXPOSE 49707
