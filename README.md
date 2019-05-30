@@ -59,11 +59,6 @@ useradd -p $(openssl passwd -1 testuser) testuser
 ```
 
 
-
-
-
-
-
 ## Testing
 
 You can run one of the stock examples:
