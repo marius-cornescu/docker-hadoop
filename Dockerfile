@@ -1,9 +1,10 @@
 ################################################################################### 
 # Creates pseudo distributed hadoop 2.7.1
 #
+# docker build --rm -t rtzan/hadoop:2.7.1 .
 # docker build --rm --build-arg http_proxy=$http_proxy -t rtzan/hadoop:2.7.1 .
 # 
-# docker run -i -t --net=host rtzan/hadoop:2.7.1 /bin/bash
+# docker run -it rtzan/hadoop:2.7.1 /etc/bootstrap.sh -bash
 # 
 ################################################################################### 
 FROM rtzan/pam:centos-6.5
