@@ -20,25 +20,43 @@ _FYI: All the former Hadoop releases (2.3, 2.4.0, 2.4.1, 2.5.0, 2.5.1, 2.5.2, 2.
 If you'd like to try directly from the Dockerfile you can build the image as:
 
 ```
-docker build  -t sequenceiq/hadoop-docker:2.7.1 .
+docker build  -t rtzan/docker-hadoop:2.7.1 .
+
+docker build  -t rtzan/docker-hadoop:2.7.1-7.5 .
 ```
 # Pull the image
 
 The image is also released as an official Docker image from Docker's automated build repository - you can always pull or refer the image when launching containers.
 
 ```
-docker pull sequenceiq/hadoop-docker:2.7.1
+docker pull rtzan/docker-hadoop:2.7.1
 ```
 
 # Start a container
 
-In order to use the Docker image you have just build or pulled use:
+In order to use the Docker image you have just built or pulled, use:
 
 **Make sure that SELinux is disabled on the host. If you are using boot2docker you don't need to do anything.**
 
 ```
-docker run -it sequenceiq/hadoop-docker:2.7.1 /etc/bootstrap.sh -bash
+docker run -it rtzan/docker-hadoop:2.7.1 /etc/bootstrap.sh -bash
+
+docker run -it rtzan/docker-hadoop:2.7.1-7.5 /etc/bootstrap.sh -bash
+
 ```
+
+
+```
+# get container ip:
+docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" <container name>
+
+
+# add a use testuser with password testuser
+useradd -p $(openssl passwd -1 testuser) testuser
+
+
+```
+
 
 ## Testing
 
