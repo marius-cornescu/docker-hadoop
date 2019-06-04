@@ -6,15 +6,12 @@
 # docker run -i -t --net=host rtzan/hadoop:2.7.1 /bin/bash
 # 
 ################################################################################### 
-FROM rtzan/pam:centos-6.5
-MAINTAINER rtzan
-#
+FROM sequenceiq/pam:centos-6.5
+MAINTAINER SequenceIQ
+# 
 USER root
 # 
-ARG http_proxy
 # 
-ENV http_proxy $http_proxy
-ENV https_proxy $http_proxy
 # 
 # --------------------------------------------------
 RUN touch /var/lib/rpm/* \
@@ -60,7 +57,7 @@ ENV YARN_CONF_DIR $HADOOP_PREFIX/etc/hadoop
 # 
 RUN sed -i '/^export JAVA_HOME/ s:.*:export JAVA_HOME=/etc/alternatives/java_sdk\nexport HADOOP_PREFIX=/usr/local/hadoop\nexport HADOOP_HOME=/usr/local/hadoop\n:' $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
 RUN sed -i '/^export HADOOP_CONF_DIR/ s:.*:export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop/:' $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
-RUN . $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
+#RUN . $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
 # 
 RUN mkdir $HADOOP_PREFIX/input
 RUN cp $HADOOP_PREFIX/etc/hadoop/*.xml $HADOOP_PREFIX/input
@@ -72,11 +69,6 @@ ADD hdfs-site.xml $HADOOP_PREFIX/etc/hadoop/hdfs-site.xml
 # 
 ADD mapred-site.xml $HADOOP_PREFIX/etc/hadoop/mapred-site.xml
 ADD yarn-site.xml $HADOOP_PREFIX/etc/hadoop/yarn-site.xml
-# 
-# prepare tez installation
-#ADD tez-site.xml $HADOOP_PREFIX/etc/hadoop/tez-site.xml
-#RUN mkdir -p /root/tez
-#RUN curl -s http://www-eu.apache.org/dist/tez/0.8.5/apache-tez-0.8.5-bin.tar.gz | tar -xz -C /root/tez
 # 
 RUN $HADOOP_PREFIX/bin/hdfs namenode -format
 # 
@@ -105,7 +97,7 @@ RUN chmod 700 /etc/bootstrap.sh
 ENV BOOTSTRAP /etc/bootstrap.sh
 # 
 # --------------------------------------------------
-# working around docker.io build error
+# workingaround docker.io build error
 RUN ls -la /usr/local/hadoop/etc/hadoop/*-env.sh
 RUN chmod +x /usr/local/hadoop/etc/hadoop/*-env.sh
 RUN ls -la /usr/local/hadoop/etc/hadoop/*-env.sh
