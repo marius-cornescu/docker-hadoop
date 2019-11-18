@@ -7,7 +7,7 @@
 # docker run -it rtzan/hadoop:2.7.1 /etc/bootstrap.sh -bash
 # 
 ################################################################################### 
-FROM rtzan/pam:centos-6.5
+FROM sequenceiq/pam:centos-6.5
 MAINTAINER rtzan
 #
 USER root

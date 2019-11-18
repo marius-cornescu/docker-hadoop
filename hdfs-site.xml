@@ -3,4 +3,10 @@
         <name>dfs.replication</name>
         <value>1</value>
     </property>
+	<!-- WebDfs -->
+	<property>
+		<name>dfs.webhdfs.enabled</name>
+		<value>true</value>
+	</property>
+
 </configuration>

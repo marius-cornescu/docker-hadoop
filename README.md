@@ -40,7 +40,7 @@ In order to use the Docker image you have just built or pulled, use:
 **Make sure that SELinux is disabled on the host. If you are using boot2docker you don't need to do anything.**
 
 ```
-docker run -it rtzan/docker-hadoop:2.7.1 /etc/bootstrap.sh -bash
+docker run -p 50070:50070 -it rtzan/docker-hadoop:2.7.1 /etc/bootstrap.sh -bash
 
 docker run -it rtzan/docker-hadoop:2.7.1-7.5 /etc/bootstrap.sh -bash
 
