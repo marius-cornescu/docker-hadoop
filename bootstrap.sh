@@ -23,13 +23,9 @@ $HADOOP_PREFIX/sbin/start-dfs.sh
 #
 echo -e "\e[1;31m > Start HADOOP:Yarn \e[0m"
 $HADOOP_PREFIX/sbin/start-yarn.sh
-<<<<<<< HEAD
-#$HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh start historyserver
-=======
 #
 echo -e "\e[1;31m > Start HADOOP:JobHistoryServer \e[0m"
-$HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh start historyserver
->>>>>>> 65fd91c675e226dd3aa85b5bd54d732b3db58e16
+#$HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh start historyserver
 
 # install Tez
 #export PATH=$HADOOP_PREFIX/sbin:$HADOOP_PREFIX/bin:$PATH
