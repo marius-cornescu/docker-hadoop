@@ -1,4 +1,4 @@
-################################################################################### 
+#####################################################################################################################################################
 # Creates pseudo distributed hadoop 2.7.1
 #
 # docker build --rm -t rtzan/hadoop:2.7.1 .
@@ -6,8 +6,13 @@
 # 
 # docker run -it rtzan/hadoop:2.7.1 /etc/bootstrap.sh -bash
 # 
+<<<<<<< HEAD
 ################################################################################### 
 FROM sequenceiq/pam:centos-6.5
+=======
+#####################################################################################################################################################
+FROM rtzan/pam:centos-6.5
+>>>>>>> 65fd91c675e226dd3aa85b5bd54d732b3db58e16
 MAINTAINER rtzan
 #
 USER root
@@ -17,7 +22,7 @@ ARG http_proxy
 ENV http_proxy $http_proxy
 ENV https_proxy $http_proxy
 # 
-# --------------------------------------------------
+#====================================================================================================================================================
 RUN touch /var/lib/rpm/* \
     && yum -y install yum-plugin-ovl
 # 
@@ -52,11 +57,12 @@ RUN curl --insecure -s https://archive.apache.org/dist/hadoop/common/hadoop-2.7.
 RUN cd /usr/local && ln -s ./hadoop-2.7.1 hadoop
 # 
 ENV HADOOP_PREFIX /usr/local/hadoop
-ENV HADOOP_COMMON_HOME /usr/local/hadoop
-ENV HADOOP_HDFS_HOME /usr/local/hadoop
-ENV HADOOP_MAPRED_HOME /usr/local/hadoop
-ENV HADOOP_YARN_HOME /usr/local/hadoop
-ENV HADOOP_CONF_DIR /usr/local/hadoop/etc/hadoop
+#====================================================================================================================================================
+ENV HADOOP_COMMON_HOME $HADOOP_PREFIX
+ENV HADOOP_HDFS_HOME $HADOOP_PREFIX
+ENV HADOOP_MAPRED_HOME $HADOOP_PREFIX
+ENV HADOOP_YARN_HOME $HADOOP_PREFIX
+ENV HADOOP_CONF_DIR $HADOOP_PREFIX/etc/hadoop
 ENV YARN_CONF_DIR $HADOOP_PREFIX/etc/hadoop
 # 
 RUN sed -i '/^export JAVA_HOME/ s:.*:export JAVA_HOME=/etc/alternatives/java_sdk\nexport HADOOP_PREFIX=/usr/local/hadoop\nexport HADOOP_HOME=/usr/local/hadoop\n:' $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
@@ -95,7 +101,7 @@ RUN chown root:root /root/.ssh/config
 # RUN easy_install pip
 # RUN curl https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py -o - | python
 # RUN pip install supervisor
-#
+# 
 # ADD supervisord.conf /etc/supervisord.conf
 # --------------------------------------------------
 # 
@@ -107,9 +113,9 @@ ENV BOOTSTRAP /etc/bootstrap.sh
 # 
 # --------------------------------------------------
 # working around docker.io build error
-RUN ls -la /usr/local/hadoop/etc/hadoop/*-env.sh
-RUN chmod +x /usr/local/hadoop/etc/hadoop/*-env.sh
-RUN ls -la /usr/local/hadoop/etc/hadoop/*-env.sh
+RUN ls -la $HADOOP_PREFIX/etc/hadoop/*-env.sh
+RUN chmod +x $HADOOP_PREFIX/etc/hadoop/*-env.sh
+RUN ls -la $HADOOP_PREFIX/etc/hadoop/*-env.sh
 # --------------------------------------------------
 
 # fix the 254 error code
@@ -122,7 +128,7 @@ RUN service sshd start && $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh && $HADOOP_PRE
 
 CMD ["/etc/bootstrap.sh", "-d"]
 
-# --------------------------------------------------
+#====================================================================================================================================================
 # Hdfs ports
 EXPOSE 50010 50020 50070 50075 50090 8020 9000
 # Mapred ports
@@ -133,5 +139,4 @@ EXPOSE 8030 8031 8032 8033 8040 8042 8088
 EXPOSE 2122
 #Other ports
 EXPOSE 49707
-# --------------------------------------------------
-################################################################################### 
+#####################################################################################################################################################
