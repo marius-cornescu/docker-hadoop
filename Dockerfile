@@ -1,10 +1,10 @@
 #####################################################################################################################################################
-# Creates pseudo distributed hadoop 2.7.1
+# Creates pseudo distributed hadoop 2.9.2
 #
-# docker build --rm -t rtzan/hadoop:2.7.1 .
-# docker build --rm --build-arg http_proxy=$http_proxy -t rtzan/hadoop:2.7.1 .
+# docker build --rm -t rtzan/hadoop:2.9.2 .
+# docker build --rm --build-arg http_proxy=$http_proxy -t rtzan/hadoop:2.9.2 .
 # 
-# docker run -it rtzan/hadoop:2.7.1 /etc/bootstrap.sh -bash
+# docker run -it rtzan/hadoop:2.9.2 /etc/bootstrap.sh -bash
 # 
 ################################################################################### 
 FROM sequenceiq/pam:centos-6.5
@@ -45,11 +45,11 @@ COPY java_env.sh /etc/profile.d/java_env.sh
 # 
 # download native support
 RUN mkdir -p /tmp/native
-RUN curl --insecure -L https://github.com/sequenceiq/docker-hadoop-build/releases/download/v2.7.1/hadoop-native-64-2.7.1.tgz | tar -xz -C /tmp/native
+#RUN curl --insecure -L https://github.com/sequenceiq/docker-hadoop-build/releases/download/v2.9.2/hadoop-native-64-2.9.2.tgz | tar -xz -C /tmp/native
 # 
 # hadoop
-RUN curl --insecure -s https://archive.apache.org/dist/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz | tar -xz -C /usr/local/
-RUN cd /usr/local && ln -s ./hadoop-2.7.1 hadoop
+RUN curl --insecure -s https://archive.apache.org/dist/hadoop/common/hadoop-2.9.2/hadoop-2.9.2.tar.gz | tar -xz -C /usr/local/
+RUN cd /usr/local && ln -s ./hadoop-2.9.2 hadoop
 # 
 ENV HADOOP_PREFIX /usr/local/hadoop
 #====================================================================================================================================================
